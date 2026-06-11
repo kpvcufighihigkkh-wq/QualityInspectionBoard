@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>质检看板导入台</title>
+    <link rel="stylesheet" href="/styles.css?v=20260413b" />
+  </head>
+  <body>
+    <main class="page page-console">
+      <section class="hero hero-console">
+        <div class="hero-copy">
+          <div class="eyebrow">Dispatch Console</div>
+          <h1 class="hero-title">质检看板发布台</h1>
+          <p class="hero-subtitle">
+            面向质检现场的 Excel 发布控制台。上传一份多 Sheet 表后，服务端会完成解析、版本发布，并推动电视轮播更新。
+          </p>
+          <div class="console-badges">
+            <span class="console-badge">局域网发布</span>
+            <span class="console-badge">三屏轮播</span>
+            <span class="console-badge">超量滚动</span>
+          </div>
+        </div>
+        <div class="console-rail">
+          <div class="console-stat">
+            <div class="meta-label">推荐文件</div>
+            <div class="meta-value">面板一.xlsx</div>
+          </div>
+          <div class="console-stat">
+            <div class="meta-label">工作表</div>
+            <div class="meta-value">检验明细 / 退换货明细 / 月度黑榜</div>
+          </div>
+          <div class="console-stat">
+            <div class="meta-label">发布方式</div>
+            <div class="meta-value">服务端解析后上屏</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="console-layout">
+        <aside class="side-panel">
+          <div class="side-card">
+            <div class="side-title">发布前检查</div>
+            <div class="check-row">文件：质检多 Sheet Excel</div>
+            <div class="check-row">工作表名称已确认</div>
+            <div class="check-row">标题与屏幕编号已确认</div>
+            <div class="check-row">轮播时长或自动计算规则已确认</div>
+          </div>
+          <div class="side-card">
+            <div class="side-title">大屏表现</div>
+            <div class="check-row">一屏只显示一张表</div>
+            <div class="check-row">三屏按顺序轮播</div>
+            <div class="check-row">超出行数后向上滚动</div>
+            <div class="check-row">导入失败不覆盖当前版本</div>
+          </div>
+        </aside>
+
+        <section class="panel console-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>发布配置</h2>
+              <p class="panel-note">适合班组长、仓管、计划员直接在局域网 PC 上完成发布。</p>
+            </div>
+            <div class="panel-chip">Phase 1</div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="boardTitle">看板标题</label>
+              <input id="boardTitle" type="text" value="质量检验看板" />
+            </div>
+            <div class="field">
+              <label for="screenCode">屏幕编号</label>
+              <input id="screenCode" type="text" value="quality-tv-01" />
+            </div>
+            <div class="field">
+              <label for="updatedBy">导入人员</label>
+              <input id="updatedBy" type="text" placeholder="例如：张三" />
+            </div>
+            <div class="field">
+              <label for="sourceSummary">数据来源说明</label>
+              <input id="sourceSummary" type="text" value="Excel 三版面导入" />
+            </div>
+            <div class="field">
+              <label for="file">质检 Excel</label>
+              <input id="file" type="file" accept=".xlsx,.xls" />
+            </div>
+            <div class="field">
+              <label for="tableTitleA">屏幕一标题</label>
+              <input id="tableTitleA" type="text" value="检验明细" />
+            </div>
+            <div class="field">
+              <label for="tableTitleB">屏幕二标题</label>
+              <input id="tableTitleB" type="text" value="退换货明细" />
+            </div>
+            <div class="field">
+              <label for="tableTitleC">屏幕三标题</label>
+              <input id="tableTitleC" type="text" value="月度黑榜" />
+            </div>
+            <div class="field">
+              <label for="durationSecondsA">屏幕一时长（秒）</label>
+              <input id="durationSecondsA" type="number" min="1" placeholder="不填则自动计算" />
+            </div>
+            <div class="field">
+              <label for="durationSecondsB">屏幕二时长（秒）</label>
+              <input id="durationSecondsB" type="number" min="1" placeholder="不填则自动计算" />
+            </div>
+            <div class="field">
+              <label for="durationSecondsC">屏幕三时长（秒）</label>
+              <input id="durationSecondsC" type="number" min="1" placeholder="不填则自动计算" />
+            </div>
+            <div class="field">
+              <label for="visibleRowCount">单屏可见行数阈值</label>
+              <input id="visibleRowCount" type="number" min="1" value="8" />
+            </div>
+            <div class="field full">
+              <label for="notes">班次 / 备注</label>
+              <textarea id="notes" placeholder="可选：记录本次导入批次、班次或其他说明"></textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="submitBtn" class="primary-btn" type="button">发布到电视轮播看板</button>
+            <div class="secondary-note">视觉方向已调整为工业控制台风格，突出远距离可读性和现场状态感。</div>
+          </div>
+          <div id="message" class="message"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="/import.js?v=20260413b"></script>
+  </body>
+</html>

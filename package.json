@@ -1,0 +1,16 @@
+{
+  "name": "quality-inspection-board",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Quality inspection board service for Excel-driven LAN board publishing",
+  "scripts": {
+    "start": "node server.js",
+    "package:windows": "powershell -ExecutionPolicy Bypass -File ./scripts/package-server.ps1"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "express": "^4.21.2",
+    "multer": "^2.0.2",
+    "xlsx": "^0.18.5"
+  }
+}

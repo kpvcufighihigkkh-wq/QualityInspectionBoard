@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>质检电视看板</title>
+    <link rel="stylesheet" href="/styles.css?v=20260416a" />
+  </head>
+  <body>
+    <main class="page page-tv">
+      <section class="tv-shell">
+        <div class="tv-topline">
+          <div class="topline-track"></div>
+          <div class="topline-pulse pulse-a"></div>
+          <div class="topline-pulse pulse-b"></div>
+          <div class="topline-pulse pulse-c"></div>
+          <div class="tv-top-company">意锐科（宁波）智能科技有限公司</div>
+          <div class="topline-bars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <header class="tv-header">
+          <div class="tv-brand">
+            <div class="tv-brand-logo">
+              <img class="tv-company-logo" src="/assets/logo-dark-cutout.png" alt="意锐科（宁波）智能科技有限公司 Logo" />
+            </div>
+            <h1 id="boardTitle" class="tv-title">质检看板</h1>
+          </div>
+          <div class="tv-status-strip">
+            <div class="status-tile">
+              <div class="meta-label">屏幕编号</div>
+              <div id="screenCode" class="meta-value">quality-tv-01</div>
+            </div>
+            <div class="status-tile">
+              <div class="meta-label">最近发布</div>
+              <div id="updatedAt" class="meta-value">未更新</div>
+            </div>
+            <div class="status-tile">
+              <div class="meta-label">连接 / 版本</div>
+              <div id="connectionMeta" class="meta-value">初始化中</div>
+            </div>
+          </div>
+        </header>
+
+        <section class="tv-stage">
+          <section class="board board-tv">
+            <div class="board-summary-row">
+              <div id="screenTitle" class="board-screen-title">待加载屏幕</div>
+              <div id="screenMetrics" class="screen-metrics"></div>
+              <div class="rotation-progress rotation-progress-inline">
+                <div id="rotationMeta" class="rotation-meta-inline">轮播准备中</div>
+                <div class="rotation-time-inline">
+                  <div id="rotationCountdown" class="rotation-countdown">--s</div>
+                </div>
+                <div class="rotation-bar">
+                  <div id="rotationFill" class="rotation-fill"></div>
+                </div>
+              </div>
+            </div>
+            <div id="screenContent" class="screen-content"></div>
+            <div id="emptyState" class="empty-state" hidden>暂无数据，请在导入页上传 Excel。</div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="/tv-layout.js?v=20260413e"></script>
+    <script src="/tv-due.js?v=20260414a"></script>
+    <script src="/tv.js?v=20260416a"></script>
+  </body>
+</html>

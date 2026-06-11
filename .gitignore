@@ -1,0 +1,16 @@
+node_modules/
+.env
+.env.*
+.vscode/
+.idea/
+.cursor/
+.serena/
+release/
+logs/
+data/uploads/
+data/*.db
+data/*.db-*
+task_plan.md
+findings.md
+progress.md
+面板一.xlsx

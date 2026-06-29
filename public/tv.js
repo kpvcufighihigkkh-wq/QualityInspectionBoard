@@ -489,6 +489,18 @@ function sumBy(rows, getter) {
   return rows.reduce((total, row) => total + toNumber(getter(row)), 0);
 }
 
+function isFutureDate(value) {
+  const date = parsePlanDate(value);
+  if (!date) {
+    return false;
+  }
+
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const targetDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  return targetDay > today;
+}
+
 function buildQualityInspectionView(table) {
   const headers = Array.isArray(table.headers) ? table.headers.map(repairMojibake) : [];
   const rows = Array.isArray(table.rows) ? table.rows : [];
@@ -577,19 +589,19 @@ function buildReturnExchangeView(table) {
     requester: getCellByHeader(row, headers, ["需求人"], 8)
   }));
 
-  const pendingRows = normalizedRows.filter((row) => row.returnQty && !row.backDate).length;
+  const reminderRows = normalizedRows.filter((row) => isFutureDate(row.returnDate)).length;
   const metrics = [
     { label: "退换货批次", value: String(normalizedRows.length), tone: "metric-tone-1" },
     { label: "送货数量", value: String(sumBy(normalizedRows, (row) => row.deliveryQty)), tone: "metric-tone-2" },
     { label: "退换货数量", value: String(sumBy(normalizedRows, (row) => row.returnQty)), tone: "metric-danger metric-tone-3" },
-    { label: "待返回", value: String(pendingRows), tone: pendingRows ? "metric-warn metric-tone-4" : "metric-tone-4" }
+    { label: "日期提醒", value: String(reminderRows), tone: reminderRows ? "metric-warn metric-tone-4" : "metric-tone-4" }
   ];
 
   const tableMarkup = normalizedRows
     .map((row) => {
-      const pending = row.returnQty && !row.backDate;
+      const needsReminder = isFutureDate(row.returnDate);
       return `
-        <tr class="${pending ? "status-warn" : "status-ok"}">
+        <tr class="${needsReminder ? "status-warn" : "status-ok"}">
           <td>${escapeHtml(repairMojibake(row.deliveryDate))}</td>
           <td><span class="code-pill">${escapeHtml(repairMojibake(row.orderNo))}</span></td>
           <td><span class="code-pill">${escapeHtml(repairMojibake(row.drawingNo))}</span></td>
@@ -599,7 +611,6 @@ function buildReturnExchangeView(table) {
           <td>${escapeHtml(repairMojibake(row.backDate))}</td>
           <td>${escapeHtml(repairMojibake(row.owner))}</td>
           <td>${escapeHtml(repairMojibake(row.requester))}</td>
-          <td><span class="status-pill ${pending ? "status-warn" : "status-ok"}">${pending ? "待返回" : "已闭环"}</span></td>
         </tr>
       `;
     })
@@ -621,7 +632,6 @@ function buildReturnExchangeView(table) {
               <th>返回日期</th>
               <th>责任人</th>
               <th>需求人</th>
-              <th>状态</th>
             </tr>
           </thead>
           <tbody>${tableMarkup}</tbody>
